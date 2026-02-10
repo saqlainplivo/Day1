@@ -26,12 +26,12 @@ def scan_folder(folder_path, filter_exts=None):
 
 
 def format_size(size_bytes):
-    """Format byte count into a human-readable string."""
+    """Format byte count using SI units (KB=1000)."""
     for unit in ("B", "KB", "MB", "GB", "TB"):
-        if size_bytes < 1024:
-            return f"{size_bytes:.2f} {unit}"
-        size_bytes /= 1024
-    return f"{size_bytes:.2f} PB"
+        if size_bytes < 1000:
+            return f"{size_bytes:.1f} {unit}"
+        size_bytes /= 1000
+    return f"{size_bytes:.1f} PB"
 
 
 def build_report(folder_path, file_sizes, extensions, filter_exts=None):
