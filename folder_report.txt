@@ -1,0 +1,16 @@
+Folder Scan Report
+==================
+Scanned folder : /Users/saqlain.p/Downloads
+Date           : 2026-02-10 10:21:17
+
+Total files    : 14
+Total size     : 899.43 MB
+Largest file   : Cursor-darwin-arm64.dmg (231.27 MB)
+
+File Types Breakdown
+--------------------
+  .pdf                 4 file(s)
+  .dmg                 3 file(s)
+  .zip                 3 file(s)
+  (no extension)       2 file(s)
+  .jpeg                2 file(s)
