@@ -25,13 +25,23 @@ def scan_folder(folder_path, filter_exts=None):
     return file_sizes, extensions
 
 
+<<<<<<< HEAD (main branch - uses 1000-based SI units)
 def format_size(size_bytes):
-    """Format byte count into a human-readable string."""
-    for unit in ("B", "KB", "MB", "GB", "TB"):
+    """Format byte count using SI units (KB=1000)."""
+    for unit, threshold in (("B", 1000), ("KB", 1000), ("MB", 1000), ("GB", 1000), ("TB", 1000)):
+        if size_bytes < threshold:
+            return f"{size_bytes:.1f} {unit}"
+        size_bytes /= threshold
+    return f"{size_bytes:.1f} PB"
+=======
+def format_size(size_bytes):
+    """Format byte count using binary units (KiB=1024)."""
+    for unit in ("B", "KiB", "MiB", "GiB", "TiB"):
         if size_bytes < 1024:
             return f"{size_bytes:.2f} {unit}"
         size_bytes /= 1024
-    return f"{size_bytes:.2f} PB"
+    return f"{size_bytes:.2f} PiB"
+>>>>>>> feature/binary-units (feature branch - uses 1024-based binary units)
 
 
 def build_report(folder_path, file_sizes, extensions, filter_exts=None):
