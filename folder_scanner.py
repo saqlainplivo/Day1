@@ -25,13 +25,42 @@ def scan_folder(folder_path, filter_exts=None):
     return file_sizes, extensions
 
 
-def format_size(size_bytes):
-    """Format byte count using binary units (KiB=1024)."""
-    for unit in ("B", "KiB", "MiB", "GiB", "TiB"):
+def format_size(size_bytes: int | float) -> str:
+    """
+    Convert a byte count into a human-readable string using binary units.
+
+    Uses IEC binary prefixes (1 KiB = 1024 bytes) rather than SI decimal
+    prefixes (1 KB = 1000 bytes).
+
+    Args:
+        size_bytes: File size in bytes. Can be zero or positive.
+
+    Returns:
+        A formatted string like "4.00 KiB" or "1.50 GiB".
+
+    Raises:
+        ValueError: If size_bytes is negative.
+
+    Examples:
+        >>> format_size(0)
+        '0.00 B'
+        >>> format_size(1024)
+        '1.00 KiB'
+        >>> format_size(5_000_000)
+        '4.77 MiB'
+    """
+    if size_bytes < 0:
+        raise ValueError(f"size_bytes must be non-negative, got {size_bytes}")
+
+    UNITS = ("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB")
+
+    for unit in UNITS:
         if size_bytes < 1024:
             return f"{size_bytes:.2f} {unit}"
         size_bytes /= 1024
-    return f"{size_bytes:.2f} PiB"
+
+    # If we exhaust all units, fall back to the largest one
+    return f"{size_bytes:.2f} {UNITS[-1]}"
 
 
 def build_report(folder_path, file_sizes, extensions, filter_exts=None):
