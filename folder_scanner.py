@@ -47,6 +47,15 @@ def scan_folder(folder_path, filter_exts=None, min_size=None, max_size=None):
     return file_sizes, extensions
 
 
+<<<<<<< HEAD (main)
+def format_size(size_bytes):
+    """Format byte count using SI units (KB=1000)."""
+    for unit in ("B", "KB", "MB", "GB", "TB"):
+        if size_bytes < 1000:
+            return f"{size_bytes:.1f} {unit}"
+        size_bytes /= 1000
+    return f"{size_bytes:.1f} PB"
+=======
 def format_size(size_bytes):
     """Format byte count using binary units (KiB=1024)."""
     for unit in ("B", "KiB", "MiB", "GiB", "TiB"):
@@ -54,6 +63,7 @@ def format_size(size_bytes):
             return f"{size_bytes:.2f} {unit}"
         size_bytes /= 1024
     return f"{size_bytes:.2f} PiB"
+>>>>>>> features/filter
 
 
 def build_report(folder_path, file_sizes, extensions, filter_exts=None, min_size=None, max_size=None):
